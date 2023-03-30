@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 // void bubleSort(int arr[],int len){
@@ -6,60 +7,47 @@ using namespace std;
 //     for (int j = 0; j < len - i; j++) {
 //       if (arr[j] > arr[j + 1]) {
 //         int temp = arr[j];
-//         array[j] = array[ij+ 1];
+//         array[j] = array[j+ 1];
 //         array[j+ 1] = temp;
 //       }
 //     }
 //   }
 // }
-int sortForMedian(int arr[], int len, int New){
-    int arrNew[len+1];
-    int i=0;
-    int j=0;
-    int temp = len;
-    while(i<len+1){
-        if(j<=len-1){
-            if(arr[j]>New){
-                arrNew[i]= New;
-                i++;
-            }
-            else{
-                arrNew[i]= arr[j];
-                i++;
-                j++;
-            }
-        }
-        else{
-           arr[i]=New;
-        }
+float Median(vector<int>& vect, int len){
+    float median;
+    int newLen = len+1;
+    if (len==0){
+        median = vect.at(len);
     }
-    for(int i=0;i<=len; i++){
-        arr[i]=arrNew[i];
-    }
-
-    int median;
-    if((len+1)%2 ==0){
-        median= (arrNew[(len+1)/2] + arrNew[((len+1)/2)+1])/2;
-        return median;
+    else if((newLen)%2 ==0){
+        median= (float(vect.at(len/2))+ float(vect.at(newLen/2)))/2;
     }
     else{
-        median = arrNew[((len+1)/2)+1];
-        return median;
+        median = float(vect.at(len/2));
     }
+    return median;
 }
 
 int main(){
     int n;
-    cout<<"n:";
     cin>>n;
-    int arr[n];
+    vector <int> vect;
     cout<<"elements:";
-    for(int i=0; i<n;i++){
+    
+    for (int i=0; i<n;i++)
+    {
         int ele;
-        cin>>ele;
-        arr[i]=ele;
-        cout<<arr[i];
-        int median = sortForMedian(arr, i+1, arr[i+1]);
+        cin >> ele;
+        for(int j=0; j<= i; j++){
+            if(i==0){
+                vect.push_back(ele);
+            }
+            if(vect.at(j)>ele){
+                vect.insert(vect.begin()+j,ele);
+                break;
+            }
+        }
+        float median = Median(vect, i);
         cout<<median<<"\n";
     }
     return 0;
