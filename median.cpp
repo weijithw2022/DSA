@@ -20,7 +20,7 @@ float Median(vector<int>& vect, int len){
         median = vect.at(len);
     }
     else if((newLen)%2 ==0){
-        median= (float(vect.at(len/2))+ float(vect.at(newLen/2)))/2;
+        median= float(float(vect.at(len/2))+ float(vect.at(newLen/2)))/2;
     }
     else{
         median = float(vect.at(len/2));
@@ -40,12 +40,23 @@ int main(){
         cin >> ele;
         for(int j=0; j<= i; j++){
             if(i==0){
+                cout<<"I am here;";
                 vect.push_back(ele);
+                break;
             }
-            if(vect.at(j)>ele){
+            if(vect.at(j)> ele){
                 vect.insert(vect.begin()+j,ele);
                 break;
             }
+            if(vect.at(vect.size()-1)<ele){
+                vect.push_back(ele);
+                break;
+            }
+        }
+        for (int i = 0; i < vect.size(); i++) {
+            // Printing the element at
+            // index 'i' of vector
+            cout << vect[i] << " ";
         }
         float median = Median(vect, i);
         cout<<median<<"\n";
