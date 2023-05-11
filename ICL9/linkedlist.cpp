@@ -67,6 +67,7 @@ struct LinkedList{
     void print_list(){
         if (head == NULL){
             cout<<"[]"<<endl;
+            break;
         }
         else{
             Node * temp = head;
